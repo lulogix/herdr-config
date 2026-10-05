@@ -1,0 +1,95 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manifests:
+    name: Validate plugin manifests and skills
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate
+        run: python3 scripts/validate.py --strict
+      - name: Marketplace readiness
+        run: |
+          set -euo pipefail
+          count=$(find plugins -mindepth 2 -maxdepth 2 -name herdr-plugin.toml | wc -l | tr -d ' ')
+          echo "discovered $count installable plugin manifest(s)"
+          if [ "$count" -eq 0 ]; then
+            echo "no herdr-plugin.toml found; the marketplace index will skip this repository" >&2
+            exit 1
+          fi
+
+  tests:
+    name: Plugin unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          # Pinned: 22.18+ is where Node runs .ts files without a flag.
+          node-version: "22.20"
+      - name: Run every plugin test suite
+        run: |
+          set -euo pipefail
+          found=0
+          for pkg in plugins/*/package.json; do
+            [ -f "$pkg" ] || continue
+            found=1
+            dir=$(dirname "$pkg")
+            echo "== $dir"
+            (cd "$dir" && npm test)
+          done
+          if [ "$found" -eq 0 ]; then
+            echo "no plugin test suites in this repository" >&2
+            exit 1
+          fi
+
+  typecheck:
+    name: Typecheck TypeScript plugins
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install TypeScript
+        run: npm install --no-save --no-package-lock typescript@5
+      - name: tsc --noEmit
+        run: |
+          set -euo pipefail
+          found=0
+          for config in plugins/*/tsconfig.json; do
+            [ -f "$config" ] || continue
+            found=1
+            echo "== $config"
+            npx tsc --noEmit -p "$config"
+          done
+          if [ "$found" -eq 0 ]; then
+            echo "no TypeScript projects to check"
+          fi
+      - name: Committed build output is current
+        run: |
+          set -euo pipefail
+          for config in plugins/*/tsconfig.build.json; do
+            [ -f "$config" ] || continue
+            echo "== $config"
+            (cd "$(dirname "$config")" && npx tsc -p "$config")
+          done
+          dirty=$(git status --porcelain | grep -E 'plugins/[^/]+/dist/' || true)
+          if [ -n "$dirty" ]; then
+            echo "committed dist/ does not match src/; run 'make build' and commit:" >&2
+            echo "$dirty" >&2
+            exit 1
+          fi
+          echo "committed build output matches src/"

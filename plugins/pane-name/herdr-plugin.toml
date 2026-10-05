@@ -1,0 +1,23 @@
+id = "herdr-config.pane-name"
+name = "Pane Name"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "Address agents by pane name instead of pane id, and refuse to send when a name is ambiguous"
+platforms = ["linux", "macos"]
+
+# Interactive search-and-send UI.
+[[panes]]
+id = "picker"
+title = "Send to a pane by name"
+placement = "popup"
+width = "80%"
+height = 26
+command = ["node", "dist/cli.js", "picker"]
+
+# Print every addressable name in the current session.
+[[actions]]
+id = "list-names"
+title = "List pane names"
+description = "Show every name that can address a pane, and which panes still need one"
+contexts = ["global"]
+command = ["node", "dist/cli.js", "names"]

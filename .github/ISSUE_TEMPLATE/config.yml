@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Herdr documentation
+    url: https://herdr.dev/docs/
+    about: Install, configuration, CLI reference, plugins, and socket API docs.
+  - name: Herdr plugin authoring guide
+    url: https://herdr.dev/docs/plugins/
+    about: The upstream contract these plugins follow.
+  - name: Marketplace
+    url: https://herdr.dev/plugins/
+    about: Browse community plugins and see how listing works.

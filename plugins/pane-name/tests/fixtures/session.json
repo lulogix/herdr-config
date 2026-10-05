@@ -1,0 +1,129 @@
+{
+  "panes": [
+    {
+      "pane_id": "w1:p1",
+      "tab_id": "w1:t1",
+      "workspace_id": "w1",
+      "label": null,
+      "agent": "claude",
+      "agent_status": "working",
+      "terminal_title": "\u25d0 Build API refactor",
+      "terminal_title_stripped": "Build API refactor",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w1:p2",
+      "tab_id": "w1:t2",
+      "workspace_id": "w1",
+      "label": null,
+      "agent": "pi",
+      "agent_status": "idle",
+      "terminal_title": "\u03c0 - docs",
+      "terminal_title_stripped": "\u03c0 - docs",
+      "cwd": "/work/docs"
+    },
+    {
+      "pane_id": "w1:p3",
+      "tab_id": "w1:t1",
+      "workspace_id": "w1",
+      "label": "reviewer",
+      "agent": "pi",
+      "agent_status": "idle",
+      "terminal_title": "\u03c0 - app",
+      "terminal_title_stripped": "\u03c0 - app",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w1:p4",
+      "tab_id": "w1:t3",
+      "workspace_id": "w1",
+      "label": "notes",
+      "agent": "claude",
+      "agent_status": "idle",
+      "terminal_title": "Release notes draft",
+      "terminal_title_stripped": "Release notes draft",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w1:p5",
+      "tab_id": "w1:t3",
+      "workspace_id": "w1",
+      "label": null,
+      "agent": null,
+      "agent_status": "unknown",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w1:p6",
+      "tab_id": "w1:t1",
+      "workspace_id": "w1",
+      "label": "reviewer-b",
+      "agent": "pi",
+      "agent_status": "blocked",
+      "terminal_title": "\u03c0 - app",
+      "terminal_title_stripped": "\u03c0 - app",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w1:p7",
+      "tab_id": "w1:t4",
+      "workspace_id": "w1",
+      "label": "ship-it",
+      "agent": "pi",
+      "agent_status": "idle",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w2:p1",
+      "tab_id": "w2:t1",
+      "workspace_id": "w2",
+      "label": null,
+      "agent": "pi",
+      "agent_status": "idle",
+      "terminal_title": "\u03c0 - playground",
+      "terminal_title_stripped": "\u03c0 - playground",
+      "cwd": "/work/playground"
+    },
+    {
+      "pane_id": "w2:p2",
+      "tab_id": "w2:t2",
+      "workspace_id": "w2",
+      "label": null,
+      "agent": "claude",
+      "agent_status": "idle",
+      "cwd": "/work/app"
+    },
+    {
+      "pane_id": "w3:p1",
+      "tab_id": "w3:t1",
+      "workspace_id": "w3",
+      "label": null,
+      "agent": "pi",
+      "agent_status": "idle",
+      "cwd": "/work/scratch"
+    }
+  ],
+  "agents": [
+    { "pane_id": "w1:p1", "name": null, "agent": "claude", "agent_status": "working" },
+    { "pane_id": "w1:p2", "name": "writer", "agent": "pi", "agent_status": "idle" },
+    { "pane_id": "w1:p3", "name": "code-reviewer", "agent": "pi", "agent_status": "idle" },
+    { "pane_id": "w1:p4", "name": null, "agent": "claude", "agent_status": "idle" },
+    { "pane_id": "w1:p6", "name": null, "agent": "pi", "agent_status": "blocked" },
+    { "pane_id": "w2:p1", "name": null, "agent": "pi", "agent_status": "idle" },
+    { "pane_id": "w3:p1", "name": null, "agent": "pi", "agent_status": "idle" }
+  ],
+  "tabs": [
+    { "tab_id": "w1:t1", "label": "app-agent", "workspace_id": "w1" },
+    { "tab_id": "w1:t2", "label": "docs", "workspace_id": "w1" },
+    { "tab_id": "w1:t3", "label": "extras", "workspace_id": "w1" },
+    { "tab_id": "w1:t4", "label": "deploy", "workspace_id": "w1" },
+    { "tab_id": "w2:t1", "label": "playground", "workspace_id": "w2" },
+    { "tab_id": "w2:t2", "label": "app-agent", "workspace_id": "w2" },
+    { "tab_id": "w3:t1", "label": null, "workspace_id": "w3" }
+  ],
+  "workspaces": [
+    { "workspace_id": "w1", "label": "app" },
+    { "workspace_id": "w2", "label": "playground" },
+    { "workspace_id": "w3", "label": "scratch" }
+  ]
+}

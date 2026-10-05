@@ -1,0 +1,28 @@
+# Plugin build output
+dist/
+build/
+node_modules/
+__pycache__/
+*.pyc
+
+# ...except pane-name ships its compiled output, because Herdr runs plugin
+# commands with whatever `node` is on the server's PATH, and that Node may be too
+# old to execute TypeScript directly. See plugins/pane-name/README.md.
+!plugins/pane-name/dist/
+!plugins/pane-name/dist/**
+
+# Local plugin config and state (lives under `herdr plugin config-dir <id>`,
+# but keep accidental in-tree copies out of git)
+.env
+.env.local
+*.local.toml
+.herdr-plugin/
+.state/
+
+# Editor / OS noise
+.claude/
+.serena/
+.DS_Store
+.idea/
+.vscode/
+*.swp
